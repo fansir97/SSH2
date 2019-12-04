@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/tx/spring-aop.xsd">
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url"
+			value="jdbc:sqlserver://localhost:1433;databaseName=northwind">
+		</property>
+		<property name="username" value="sa"></property>
+		<property name="password" value="sa123456"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>po/Customers.hbm.xml</value>
+				<value>po/Orders.hbm.xml</value>
+				<value>po/CustomerCustomerDemo.hbm.xml</value>
+				<value>po/Employees.hbm.xml</value>
+				<value>po/Shippers.hbm.xml</value>
+				<value>po/CustomerDemographics.hbm.xml</value>
+				<value>po/OrderDetails.hbm.xml</value>
+				<value>po/Products.hbm.xml</value>
+				<value>po/Categories.hbm.xml</value>
+				<value>po/Suppliers.hbm.xml</value>
+				<value>po/EmployeeTerritories.hbm.xml</value>
+				<value>po/Region.hbm.xml</value>
+				<value>po/Territories.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 定义受事务管理的数据源 -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 注解事务生效 使用tx事务的命名空间 -->
+	<tx:annotation-driven transaction-manager="txManager" />
+	
+	<!-- dao -->
+	<bean id="proddao" class="base.GenericHibernateDao">
+		<constructor-arg index="0" value="po.Products" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="orderdao" class="base.GenericHibernateDao">
+		<constructor-arg index="0" value="po.Orders" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="custdao" class="base.GenericHibernateDao">
+		<constructor-arg index="0" value="po.Customers" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="orderdetaildao" class="base.GenericHibernateDao">
+		<constructor-arg index="0" value="po.OrderDetails" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- service -->
+	<bean id="prodservice" class="service.impl.ProductsServiceImpl">
+		<property name="proddao" ref="proddao" />
+	</bean>
+	<bean id="orderservice" class="service.impl.OrdersServiceImpl">
+		<property name="orderdao" ref="orderdao" />
+		<property name="orderdetaildao" ref="orderdetaildao" />
+	</bean>
+	<bean id="custservice" class="service.impl.CustomersServiceImpl">
+		<property name="customerdao" ref="custdao" />
+	</bean>
+	<!-- baseaction -->
+	<bean id="baseaction" abstract="true">
+		<property name="ps" ref="prodservice" />
+		<property name="os" ref="orderservice" />
+		<property name="cs" ref="custservice"></property>
+	</bean>
+	<!-- Action -->
+	<bean id="ShopAction" class="presentation.ShopAction" parent="baseaction"
+		scope="prototype">
+	</bean>
+</beans>

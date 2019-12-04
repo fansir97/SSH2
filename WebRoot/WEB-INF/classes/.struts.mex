@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="actions" location="24,211" size="280,245">
+    <action name="shop" location="85,64" size="150,125">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="productlist.jsp" />
+      </result>
+      <result name="dispcart">
+        <resourceEdge source="dispcart" routing="0" target="dispcart.jsp" />
+      </result>
+      <result name="service">
+        <resourceEdge source="service" routing="0" target="service.jsp" />
+      </result>
+      <result name="login">
+        <resourceEdge source="login" routing="0" target="Login.jsp" />
+      </result>
+      <result name="savers">
+        <resourceEdge source="savers" routing="0" target="savers.jsp" />
+      </result>
+    </action>
+    <action name="regist" location="33,21" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="index.jsp" />
+      </result>
+      <result name="error">
+        <resourceEdge source="error" routing="0" target="register.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="productlist.jsp" path="/productlist.jsp" location="344,28" size="150,55" />
+  <webResource name="dispcart.jsp" path="/dispcart.jsp" location="480,133" size="150,55" />
+  <webResource name="service.jsp" path="/service.jsp" location="600,218" size="150,55" />
+  <webResource name="Login.jsp" path="/Login.jsp" location="523,488" size="150,55" />
+  <webResource name="savers.jsp" path="/savers.jsp" location="327,627" size="150,55" />
+  <package name="actions" location="291,201" size="280,245">
+    <action name="shop" location="85,64" size="150,125">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="productlist.jsp" />
+      </result>
+      <result name="dispcart">
+        <resourceEdge source="dispcart" routing="0" target="dispcart.jsp" />
+      </result>
+      <result name="service">
+        <resourceEdge source="service" routing="0" target="service.jsp" />
+      </result>
+      <result name="login">
+        <resourceEdge source="login" routing="0" target="Login.jsp" />
+      </result>
+      <result name="savers">
+        <resourceEdge source="savers" routing="0" target="savers.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="productlist.jsp" path="/productlist.jsp" location="135,33" size="150,55" />
+  <webResource name="dispcart.jsp" path="/dispcart.jsp" location="554,54" size="150,55" />
+  <webResource name="service.jsp" path="/service.jsp" location="782,217" size="150,55" />
+  <webResource name="Login.jsp" path="/Login.jsp" location="773,387" size="150,55" />
+  <webResource name="savers.jsp" path="/savers.jsp" location="120,630" size="150,55" />
+  <webResource name="index.jsp" path="/index.jsp" location="31,480" size="150,55" />
+  <webResource name="register.jsp" path="/register.jsp" location="350,500" size="150,55" />
+</Struts2Diagram>
+

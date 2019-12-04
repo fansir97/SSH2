@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- Action实例的产生由spring负责
+	<constant name="struts.objectFactory" value="spring" />-->
+	<package name="default" extends="struts-default" namespace="/">
+	<!-- <interceptor name="myAbs" class="interceptor.MyAbstractInterceptor"></interceptor>
+	<interceptor-ref name="myAbs"></interceptor-ref> -->
+	
+	<action name="shop_*" class="ShopAction" method="{1}">
+<!-- 		<action name="shop" class="ShopAction"> -->
+			<result>/productlist.jsp</result>
+			<result name="dispcart">/dispcart.jsp</result>
+			<result name="service">/service.jsp</result>
+			<result name="login">/Login.jsp</result>
+			<result name="savers">/savers.jsp</result>
+<!-- 			<result name="regist" type="chain">
+				<param name="RegistActionName">RegistAction</param>
+				<param name="namespace">/</param>
+			</result> -->
+		</action>
+		<action name="regist" class="presentation.RegistAction">
+         	<result name="success">/dispcart.jsp</result>
+         	<result name="error">/regist.jsp</result>
+         	<result name="input">/regist.jsp</result>
+         </action>
+	</package>
+</struts>
